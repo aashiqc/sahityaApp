@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios"; // Import axios for making HTTP requests
 
-export default function Home({ programs }) {
+export default function Home () {
   const [uniquePrograms, setUniquePrograms] = useState([]);
   const [uniqueGirlPrograms, setUniqueGirlPrograms] = useState([]); // Initialize state for girl programs
   const [selectedProgram, setSelectedProgram] = useState(null);
