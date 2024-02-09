@@ -10,11 +10,10 @@ datasource db {
 }
 
 model Program {
-  id                   Int            @id @default(autoincrement())
-  name                 String         @db.VarChar(100)
-  numberOfParticipants Int            @default(0)
-  status               Status         @default(READY)
-
+  id                   Int    @id @default(autoincrement())
+  name                 String @db.VarChar(100)
+  numberOfParticipants Int    @default(0)
+  status               Status @default(READY)
 }
 
 enum Status {
@@ -24,39 +23,37 @@ enum Status {
 }
 
 model Participant {
-  id                Int          @id @default(autoincrement())
-  emailAddress     String       
-  fullName         String
-  courseAndYear    String
-  enrolmentNumber  String      
-  mobileNumber     String
-  category         String
-  hall             String
-  hostelAndRoom    String
-  competition_individual_1   String
-  competition_individual_2   String
-  competition_individual_3   String
-  competition_individual_4   String
-  competition_group_1   String
-  competition_group_2        String
-
+  id                       Int    @id @default(autoincrement())
+  emailAddress             String
+  fullName                 String
+  courseAndYear            String
+  enrolmentNumber          String
+  mobileNumber             String
+  category                 String
+  hall                     String
+  hostelAndRoom            String
+  competition_individual_1 String
+  competition_individual_2 String
+  competition_individual_3 String
+  competition_individual_4 String
+  competition_group_1      String
+  competition_group_2      String
 }
+
 model ParticipantGirls {
-  id                Int          @id @default(autoincrement())
-  emailAddress     String       
-  fullName         String
-  courseAndYear    String
-  enrolmentNumber  String      
-  mobileNumber     String
-  category         String
-  hall             String
-  competition_individual_1   String
-  competition_individual_2   String
-  competition_individual_3   String
-  competition_individual_4   String
-
+  id                       Int    @id @default(autoincrement())
+  emailAddress             String
+  fullName                 String
+  courseAndYear            String
+  enrolmentNumber          String
+  mobileNumber             String
+  category                 String
+  hall                     String
+  competition_individual_1 String
+  competition_individual_2 String
+  competition_individual_3 String
+  competition_individual_4 String
 }
-
 
 model Admin {
   id       Int    @id @default(autoincrement())
