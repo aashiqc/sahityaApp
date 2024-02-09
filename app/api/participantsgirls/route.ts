@@ -3,9 +3,9 @@ import prisma from '@/app/lib/prisma'
 
 export async function GET (request: NextRequest){
     try {
-   const participants = await prisma?.participantGirls.findMany()
+   const participantsgirls = await prisma?.participantGirls.findMany()
 
-    return NextResponse.json(participants);
+    return NextResponse.json(participantsgirls);
     } catch (error) {
         console.log(error);
         
