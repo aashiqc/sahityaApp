@@ -55,6 +55,7 @@ model ParticipantGirls {
   competition_individual_4 String
 }
 
+
 model Admin {
   id       Int    @id @default(autoincrement())
   email    String @unique
