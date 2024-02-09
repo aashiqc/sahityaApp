@@ -1,5 +1,5 @@
 'use client'
-import prisma from "@/app/lib/prisma";
+import prisma from "@/lib/prisma";
 import React, { useState, useEffect } from "react";
 import styles from "./halls.module.css";
 import Link from "next/link";

@@ -1,8 +1,10 @@
+// Import necessary modules
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/app/lib/prisma';
+import prisma from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
   try {
+    // Fetch participant counts for boys and girls
     const boysHalls = await prisma?.participant.groupBy({
       by: ['hall'],
       _count: {
@@ -17,7 +19,8 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    const hallCounts = mergeHallCounts(boysHalls!, girlsHalls!);
+    // Merge the counts
+    const hallCounts = mergeHallCounts(boysHalls, girlsHalls);
 
     // Transform the data structure
     const transformedData = Object.entries(hallCounts).map(([hallname, count]) => ({
@@ -28,7 +31,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(transformedData);
   } catch (error) {
     console.error('Error fetching halls data:', error);
-    return NextResponse.json(error);
+    return NextResponse.json({ error: 'Failed to fetch halls data' });
   }
 }
 
