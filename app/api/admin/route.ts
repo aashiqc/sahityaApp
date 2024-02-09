@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 import jwt from "jsonwebtoken";
 
-export async function loginUser(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
@@ -15,7 +15,7 @@ export async function loginUser(request: NextRequest) {
       );
     }
 
-    const user = await prisma?.admin.findFirst({ where: { email } });
+    const user = await prisma?.admin.findFirst({ where: { email: email } });
 
     // Check if user exists
     if (!user) {
@@ -30,12 +30,14 @@ export async function loginUser(request: NextRequest) {
       return NextResponse.json({ error: "Invalid password" }, { status: 401 });
     }
 
+   
+
     const payload = {
       id: user.id,
       email: user.email,
     };
 
-    const newToken = jwt.sign(payload, process.env.TOKEN_SECRET!, {
+    const newToken =  jwt.sign(payload, process.env.TOKEN_SECRET!, {
       expiresIn: "5d",
     });
 
@@ -45,10 +47,10 @@ export async function loginUser(request: NextRequest) {
     });
 
     response.cookies.set("token", newToken, {
-      httpOnly: true,
-    });
+        httpOnly: true,
+    })
 
-    return response;
+    return response
 
   } catch (error) {
     console.error("Error:", error);
@@ -59,20 +61,22 @@ export async function loginUser(request: NextRequest) {
   }
 }
 
-export async function logoutUser() {
-  try {
-    const response = NextResponse.json({
-      message: "Logout successful",
-      success: true,
-    });
 
-    response.cookies.set("token", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    });
+export async function GET() {
+    try {
+        const response = NextResponse.json(
+            {
+                message: "Logout successful",
+                success: true,
+            }
+        )
+        response.cookies.set("token", "", 
+        { httpOnly: true, expires: new Date(0) 
+        });
+        return response;
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+        
+    }
 
-    return response;
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-}
