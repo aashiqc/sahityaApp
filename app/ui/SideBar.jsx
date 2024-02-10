@@ -70,12 +70,7 @@ const SideBar = () => {
       icon: <MdDesignServices />,
       src: "/dashboard/poster",
     },
-    {
-      id: "7",
-      title: "Halls",
-      icon: <FaLayerGroup />,
-      src: "/dashboard/halls",
-    },
+  
   ];
 
   return (
